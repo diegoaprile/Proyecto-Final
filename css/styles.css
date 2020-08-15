@@ -197,9 +197,10 @@ box-sizing: content-box;
 font-family: Arial, Helvetica, sans-serif;
 }
 
-label {
+#lblusername {
+display: block;
 font-size: 25px;
-display: flex;
+margin-left: 38px;
 align-items: center;
 justify-content: center;
 font-family: Arial, Helvetica, sans-serif;
