@@ -13,37 +13,15 @@
   <!-- Bootstrap core CSS -->
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
-  <style>
-    html, body{
-      height: 100%;
-    }
-
-    body {
-      display: -ms-flexbox;
-      display: flex;
-      -ms-flex-align: center;
-      align-items: center;
-      padding-top: 40px;
-      padding-bottom: 40px;
-      background-color: #f5f5f5;
-    }
-
-    .signin {
-      width: 100%;
-      max-width: 330px;
-      padding: 15px;
-      margin: auto;
-    }
-  </style>
 </head>
 
 <body>
     <div class="background">
-      <form class="content-form">
         <div id="content">
+          <form >
           <img src="img/login.png">
           <label for="username">Ingrese sus datos, por favor.</label>
-          <input type="text" id="username" class="username" placeholder="Ingrese su usuario">*
+          <input type="text" required id="username" class="username" placeholder="Ingrese su usuario">*
           <input type="password" required minlength="4" maxlength="8" id="password" class="password"
             placeholder="Ingrese su contraseña">*
           <div class="error">
@@ -59,8 +37,10 @@
             <li>Ambos campos son requeridos</li>
           </ul>
         </div>
+      </form>
     </div>
-  
+      </div>
+    </div>
   <script src="js/validacion.js"></script>
 </body>
 </html>

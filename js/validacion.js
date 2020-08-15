@@ -7,11 +7,13 @@ loginBtn.addEventListener('click', () => {
   let errorPassWord = document.getElementById('errorPassWord');
 
 
-  if (username == "" && password != "") {
+    if (username == "" && password != "") {
     return errorMessage.innerHTML = 'Error. Por favor ingresa un usuario válido.';
   } else if (password == "" && username != "") {
     return errorPassWord.innerHTML = 'Error. Por favor ingresa una contraseña válida.';
-  } else {
+  } else if (password == "" && username== ""){
+    return errorPassWord.innerHTML = 'Error. Por favor completa los campos vacíos';
+  }else {
     sessionStorage.setItem('isLogged', true);
     window.location = "index.html";
   };
