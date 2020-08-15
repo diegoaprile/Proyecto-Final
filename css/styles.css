@@ -73,6 +73,12 @@ footer p {
   background: white;
 }
 
+.mb-1{
+  margin-left: 20px;
+}
+#inform-products {
+  margin-left: 20px;
+}
 .alert{
   position: fixed;
   top:80px;
@@ -139,3 +145,106 @@ a.custom-card:hover {
 .checked {
   color: orange;
 }
+
+.background {
+  background-image: url(../img/back.png);
+  min-width: 100vw;
+  min-height: 100vh;
+  padding-top: 75px;
+}
+
+
+img {
+width: 80%;
+margin-left: 40px;
+margin-right: 40px;
+
+}
+#content {
+margin: 0 auto;
+width: 30%;
+background-color: #c6c6c72d;
+padding: 8px 10px;
+border-radius: 4px;
+box-shadow: 2px 2px 2px grey;
+font-family: Arial, Helvetica, sans-serif;
+flex-wrap: wrap;
+}
+.content-form {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+input[type=text]   {
+
+width: 80%;
+padding: 12px 20px;
+margin: 8px 10px;
+display: inline-block;
+border: 1px solid black;
+border-radius: 4px;
+box-sizing: content-box;
+font-family: Arial, Helvetica, sans-serif
+
+}
+input[type=password]    {
+
+width: 80%;
+padding: 12px 20px;
+margin: 8px 10px;
+display: inline-block;
+border: 1px solid black;
+border-radius: 4px;
+box-sizing: content-box;
+font-family: Arial, Helvetica, sans-serif
+
+}
+
+label {
+font-size: 25px;
+display: flex;
+align-items: center;
+justify-content: center;
+font-family: Arial, Helvetica, sans-serif
+
+}
+
+.btn-index{
+background-color: rgba(214, 28, 108);
+color: white;
+width: 80%;
+padding: 12px 20px;
+margin: 8px 10px;
+display: inline-block;
+border-radius: 4px;
+box-sizing: content-box;
+font-family: Arial, Helvetica, sans-serif;
+text-align: center;
+
+
+}
+
+.btn-checkbox {
+float: initial;
+box-sizing: border-box;
+
+
+}
+
+.remember {
+text-align: right;
+display: inline-block;
+font-size: 15px;
+margin-left: 120px;
+
+}
+
+#errorMessage {
+  color: yellow;
+  background-color: rgba(0,0,0,0.5);
+}
+#errorPassWord {
+  color: yellow;
+  background-color: rgba(0,0,0,0.5);
+}
+
