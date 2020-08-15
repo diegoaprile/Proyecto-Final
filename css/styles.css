@@ -145,7 +145,11 @@ a.custom-card:hover {
 .checked {
   color: orange;
 }
-
+#form{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
 .background {
   background-image: url(../img/back.png);
   background-size: cover;
@@ -235,4 +239,7 @@ margin-left: 120px;
   background-color: rgba(0,0,0,0.5);
 }
 
+li{
+  color: black;
+}
 
