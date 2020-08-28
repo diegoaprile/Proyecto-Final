@@ -20,26 +20,40 @@
       <div class="fadeIn first">
         <img src="img/login.png" id="icon" alt="User Icon" />
       </div>
-      <form>
-        <input type="text" id="username" required class="fadeIn second" name="login" placeholder="Ingrese su usuario">
-        <input type="text" id="password" required minlength="4" maxlength="8" class="fadeIn third" name="login" placeholder="Ingrese su contraseña">
-        <div class="error">
-            <h6 id="errorMessage"></h6>
-            <h6 id="errorPassWord"></h6>
+      <form id="formulario">
+        <div class="formulario__grupo" id="grupoUsuario">
+          <div class="formulario__grupo-input">
+            <input type="text" id="username" required class="fadeIn second" name="nombre"
+              placeholder="Ingrese su usuario">
+              <i class="formulario__validacion-estado fas fa-check-circle"></i>
+
           </div>
+          <p class="formulario__input-error">El usuario tiene que ser de 4 a 16 dígitos y solo puede contener numeros,
+            letras y guion bajo.</p>
+        </div>
+        <div class="formulario__grupo">
+          <div class="formulario__grupo-input" id="formularioPass">
+            <input type="password" id="password" required minlength="4" maxlength="8" class="fadeIn third"
+              name="password" placeholder="Ingrese su contraseña">
+                <i class="formulario__validacion-estado fas fa-check-circle"></i>
+          </div>
+          <p class="formulario__input-error">La contraseña tiene que ser de 4 a 12 dígitos.</p>
+        </div>
         <input type="button" class="fadeIn fourth" id="loginBtn" value="Ingresar">
         <a class="fadeIn fourth" id="btn-google"
-      href="https://accounts.google.com/o/oauth2/auth?client_id=675902717779-tsvkecligeib5gh8ojr5aktb3r028lga.apps.googleusercontent.com">Ingresar
-      con Google</a>
+          href="https://accounts.google.com/o/oauth2/auth?client_id=675902717779-tsvkecligeib5gh8ojr5aktb3r028lga.apps.googleusercontent.com">Ingresar
+          con Google</a>
       </form>
       <div id="formFooter">
         <a class="underlineHover" href="#">Olvidé mi contraseña</a>
         <span>|</span>
         <a class="underlineHover" href="#">Registrarse</a>
       </div>
-  
+
     </div>
   </div>
   <script src="js/validacion.js"></script>
+  <script src="https://kit.fontawesome.com/5c3ea7a65e.js" crossorigin="anonymous"></script>
 </body>
+
 </html>

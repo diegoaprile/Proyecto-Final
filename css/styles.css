@@ -154,7 +154,83 @@ a.custom-card, a.custom-card:hover {
 
 html {
   background-image: url(../img/back.png);
-  background-size: inherit;
+  background-attachment: fixed;
+}
+/* Barra de navegacion*/
+
+#ctn-icon-search {
+  position: absolute;
+  right: 20px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  
+  
+}
+#ctn-icon-search i{
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 300ms;
+  color: white;
+  margin-right: 30px;
+}
+#ctn-icon-search i:hover{
+  color: #0087F7;
+}
+
+#ctn-bars-search {
+  position: fixed;
+  top: -25px;
+  width: 100%;
+  padding: 20px;
+  z-index: 9;
+  transition: all 600ms;
+}
+
+#boxSearch {
+  position: fixed;
+  top: 165px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1200px;
+  background-color: white;
+  z-index: 8;
+  overflow: hidden;
+  display: none;
+}
+
+#boxSearch li a {
+  display: block;
+  width: 1200px;
+  color: #777777;;
+  padding: 12px 20px;
+
+}
+
+#boxSearch li a:hover{
+  background: #f3f3f3;
+}
+
+#ctn-bars-search input {
+  display: block;
+  width: 1200px;
+  margin: auto;
+  padding: 10px;
+  font-size: 18px;
+}
+#boxSearch li a i {
+  margin-right: 10px;
+  color: #777777;
+}
+
+#cover-ctn-search {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 7;
+  display: none;
 }
 
 #formContent {
@@ -162,9 +238,9 @@ html {
   background-color: #c6c6c72d;
   box-shadow: 2px 2px 2px grey;
 }
+
 #formFooter {
   background: none;
-  
 }
 
 #content {
@@ -178,31 +254,35 @@ html {
   box-shadow: 2px 2px 2px grey;
   font-family: Arial, Helvetica, sans-serif;
 }
+
 a {
   color: black;
-    display:inline-block;
-    text-decoration: none;
-    font-weight: 400;
-    
+  display: inline-block;
+  text-decoration: none;
+  font-weight: 400;
 }
+
 #btn-google {
-  background-color:rgba(214, 28, 108) ;
+  background-color: rgba(214, 28, 108);
   border: none;
-    color: white;
-    padding: 15px 80px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    text-transform: uppercase;
-    font-size: 13px;
-    box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
-    border-radius: 5px 5px 5px 5px;
-    margin: 5px 20px 40px 20px;
-  
+  color: white;
+  padding: 15px 35px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  text-transform: uppercase;
+  font-size: 13px;
+  -webkit-box-shadow: 0 10px 30px 0 rgba(95, 186, 233, 0.4);
+  box-shadow: 0 10px 30px 0 rgba(95, 186, 233, 0.4);
+  -webkit-border-radius: 5px 5px 5px 5px;
+  border-radius: 5px 5px 5px 5px;
+  margin: 5px 20px 40px;
 }
-#btn-google:hover{
+
+#btn-google:hover {
   background-color: #39ace7;
 }
+
 input[type=text] {
   width: 80%;
   padding: 12px 20px;
@@ -215,34 +295,22 @@ input[type=text] {
 }
 
 input[type=button] {
-  background-color:rgba(214, 28, 108) ;
- }
+  background-color: rgba(214, 28, 108);
+}
 
 input[type=password] {
   width: 80%;
   padding: 12px 20px;
   margin: 8px 15px;
+  text-align: center;
+  text-decoration: none;
   display: inline-block;
   border: 1px solid black;
   border-radius: 4px;
   box-sizing: content-box;
   font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
 }
-
-
-.btn-google {
-  background-color: rgba(214, 28, 108);
-  color: white;
-  width: 80%;
-  padding: 12px 20px;
-  margin: 8px 15px;
-  display: inline-block;
-  border-radius: 4px;
-  box-sizing: content-box;
-  font-family: Arial, Helvetica, sans-serif;
-  text-align: center;
-}
-
 
 .line {
   margin-left: 30px;
@@ -261,4 +329,26 @@ input[type=password] {
   font-size: 20px;
   color: yellow;
   background-color: rgba(0, 0, 0, 0.5);
+}
+
+#user {
+  color: white;
+}
+
+#userIcon {
+  color: white;
+  
+}
+.btn-secondary {
+  background-color: none;
+}
+#rangeFilterCost {
+  color: black;
+  margin-left: 10px;
+  padding: 6px, 12px;
+}
+
+#clearRangeFilter {
+  color: black;
+  padding: 4px, 8px;
 }

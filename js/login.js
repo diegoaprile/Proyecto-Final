@@ -17,3 +17,4 @@ sessionStorage.setItem("isLogged", false)
 sessionStorage.clear("isLogged")
 window.location = "login.html";
 });
+

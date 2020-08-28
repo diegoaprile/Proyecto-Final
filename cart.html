@@ -41,8 +41,20 @@
       <a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>
       <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
       <a class="py-2 d-none d-md-inline-block" href="cart.html">Mi carrito</a>
-      <a class="py-2 d-none d-md-inline-block" href="#" id="logoutBtn">Logout</a>
-    </div>
+        <div class="dropdown show">
+          <span>
+            <i class="fas fa-user-circle py-2 d-none d-md-inline-block" id="userIcon"></i>
+          </span>
+          <a class="btn btn-secondary dropdown-toggle" role="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          </a>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item py-2 d-none d-md-inline-block" href="my-profile.html">Mi perfil</a>
+            <a class="dropdown-item py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
+            <a class="dropdown-item py-2 d-none d-md-inline-block" href="#" id="logoutBtn">Logout</a>
+          </div>
+        </div>
+        <span class="py-2 d-none d-md-inline-block" id="user">
+        </span>
   </nav>
   <div class="container p-5">
     <div class="alert alert-danger" role="alert" style="position: relative; width:auto; top: 0;">
@@ -66,6 +78,7 @@
   <script src="js/init.js"></script>
   <script src="js/cart.js"></script>
   <script src="js/login.js"></script>
+  <script src="js/validacion.js"></script>
 </body>
 
 </html>
