@@ -31,12 +31,20 @@ function filtrarProductos() {
 
     let productosFiltrados = [];
     let searchText = document.getElementById('textSearch').value.toLowerCase();
-
+    let notFound = document.getElementById("no-search");
     for (let i = 0; i < products.length; i++) {
         nombreProducto = products[i].name.toLowerCase();
         descripcionProducto = products[i].description.toLowerCase();
-        if (nombreProducto.includes(searchText) || descripcionProducto.includes(searchText)) productosFiltrados.push(products[i]);
+        if (nombreProducto.includes(searchText) || descripcionProducto.includes(searchText)) {
+            productosFiltrados.push(products[i])
+        }
     }
+   
+        
+    
+        
+    
+    
 
 
     for (let i = 0; i < productosFiltrados.length; i++) {

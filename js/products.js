@@ -35,7 +35,7 @@ function showCategoriesList(array) {
             <div class="list-group-item list-group-item-action" >
             <div class="row " id="` + info.name + `">
                 <div class="col-3">
-                    <img src="` + info.imgSrc + `" alt="` + info.description + `" class="img-thumbnail">
+                    <img href="product-info.html" src="` + info.imgSrc + `" alt="` + info.description + `" class="img-thumbnail">
                 </div>
                 <div class="col">
                     <div class="d-flex w-100 justify-content-between">
@@ -107,7 +107,7 @@ function showCategoriesListNoParam(){
             ((maxCount == undefined) || (maxCount != undefined && parseInt(info.productCount) <= maxCount))){
 
             htmlContentToAppend += `
-            <a href="category-info.html" class="list-group-item list-group-item-action">
+            <a href="product-info.html" class="list-group-item list-group-item-action">
             <div class="list-group-item list-group-item-action" >
             <div class="row " id="` + info.name + `">
                 <div class="col-3">
@@ -181,7 +181,9 @@ document.addEventListener("DOMContentLoaded", function (e) {
         minCount = document.getElementById("rangeFilterCostMin").value;
         maxCount = document.getElementById("rangeFilterCostMax").value;
 
-        if ((minCount != undefined) && (minCount != "") && (parseInt(minCount)) >= 0) {
+
+
+        if ((minCount != undefined) && (minCount != "") &&  (parseInt(minCount)) >= 0) {
             minCount = parseInt(minCount);
         }
         else {
@@ -195,10 +197,17 @@ document.addEventListener("DOMContentLoaded", function (e) {
             maxCount = undefined;
         }
 
+
+
         for (let i = 0; i < currentCategoriesArray.length; i++) {
             if (currentCategoriesArray[i].cost >= minCount && currentCategoriesArray[i].cost <= maxCount) {
                 priceFilteredProducts.push(currentCategoriesArray[i]);
-            }
+            } 
+            // else if (minCount > maxCount || maxCount < minCount){
+                
+            // }
+
+            
         }
 
         showCategoriesList(priceFilteredProducts);

@@ -69,12 +69,14 @@
               </div>
           </div>
       </div>
-      <div class="row justify-content-end">
+      <div class="row justify-content-end" id="content">
         <div class="col-md-6"></div>
           <div class="col-md-6 col-sm-12 mb-1 container">
             <div class="row container p-0 m-0">
               <div class="col">
                 <p class="font-weight-normal text-right my-2">Cost.</p>
+                <p id="no-filter-max">El costo minimo no puede ser mayor al costo maximo</p>
+                <p id="no-filter-min">El costo maximo no puede ser menor al costo minimo</p>
               </div>
               <div class="col">
                 <input class="form-control" type="number" placeholder="min." id="rangeFilterCostMin">
@@ -92,6 +94,7 @@
           </div>
       </div>
       <div id="info-products">
+        <div id="no-search"> No se encontraron coincidencias</div>
           <div class="row">
             <div class="list-group" id="cat-list-container">
             </div>

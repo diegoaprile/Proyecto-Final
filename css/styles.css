@@ -1,3 +1,7 @@
+#userIcon {
+  color: white;
+}
+
 .jumbotron, .card-body, .container, .site-header {
   font-family: 'Raleway', serif !important;
 }
@@ -156,6 +160,7 @@ html {
   background-image: url(../img/back.png);
   background-attachment: fixed;
 }
+
 /* Barra de navegacion*/
 
 #ctn-icon-search {
@@ -164,17 +169,21 @@ html {
   height: 100%;
   display: flex;
   justify-content: center;
-  
-  
 }
-#ctn-icon-search i{
+
+#no-search {
+  display: none;
+}
+
+#ctn-icon-search i {
   font-size: 18px;
   cursor: pointer;
   transition: all 300ms;
   color: white;
   margin-right: 30px;
 }
-#ctn-icon-search i:hover{
+
+#ctn-icon-search i:hover {
   color: #0087F7;
 }
 
@@ -202,12 +211,12 @@ html {
 #boxSearch li a {
   display: block;
   width: 1200px;
-  color: #777777;;
+  color: #777777;
+  ;
   padding: 12px 20px;
-
 }
 
-#boxSearch li a:hover{
+#boxSearch li a:hover {
   background: #f3f3f3;
 }
 
@@ -218,6 +227,7 @@ html {
   padding: 10px;
   font-size: 18px;
 }
+
 #boxSearch li a i {
   margin-right: 10px;
   color: #777777;
@@ -243,7 +253,6 @@ html {
   background: none;
 }
 
-
 a {
   color: black;
   display: inline-block;
@@ -251,18 +260,23 @@ a {
   font-weight: 400;
 }
 
-
-
-
-
 .line {
   margin-left: 30px;
   margin-right: 10px;
 }
 
-
 .btn-secondary {
   background-color: none;
+}
+#no-search {
+  display: none;
+}
+#no-filter-max {
+  display: none;
+}
+
+#no-filter-min{
+  display: none;
 }
 #rangeFilterCost {
   color: black;
@@ -274,3 +288,167 @@ a {
   color: black;
   padding: 4px, 8px;
 }
+
+/* Estilos para la validacion y formulario*/
+
+#info-comment {
+  display: none;
+  padding: 5px;
+}
+#btn-nocomments {
+  display: none;
+
+}
+
+#new-comment {
+  font-family: FontAwesome 'Raleway', serif !important;
+	font-size: 18px;
+  font-weight: bold;
+  
+}
+.icon {
+  color: rgb(56, 184, 56) !important;
+}
+
+#add-comment {
+  display: none;
+
+}
+textarea {
+  resize: none;
+}
+
+#description {
+  margin-left: 25px;
+  margin-top: 15px;
+}
+
+#user {
+  margin-left: 25px;
+  margin-top: 15px;
+}
+
+#score {
+  margin-left: 850px;
+}
+
+.borderojo {
+  border: 1px solid red !important;
+}
+
+#texterror {
+  display: none;
+  margin-left: 230px;
+  font-family: 'Raleway', serif !important;
+  font-size: 15px;
+}
+
+#usererror {
+  display: none;
+  margin-left: 230px;
+  font-family: 'Raleway', serif !important;
+  font-size: 15px;
+}
+
+#commentexit {
+  display: none;
+  background-color: rgb(56, 184, 56);
+  border-radius: 4px;
+  margin-left: 490px;
+  color: white;
+  border: 2px solid rgb 56, 184, 56;
+  max-width: 28%;
+  font-size: 18px;
+  font-family: 'Raleway', serif !important;
+  
+}
+#submitComment {
+  margin-left: 550px;
+  margin-bottom: 10px;
+}
+
+#check-ok {
+  display: none;
+  color: white;
+}
+
+#btn-enviando {
+  display: none;
+  margin-left: 600px;
+}
+
+#images {
+  display: none;
+}
+#calificacion {
+  margin-left: 35px;
+}
+
+.img-foto {
+  width: 80px !important;
+  height: 80px !important;
+}
+
+/* Clasificacion estrella*/
+
+.rating {
+  float:left;
+}
+
+.rating:not(:checked) > input {
+    position:absolute;
+    top:-9999px;
+    clip:rect(0,0,0,0);
+}
+
+.rating:not(:checked) > label {
+    float:right;
+    width:1em;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:300%;
+    color:#ddd;
+}
+
+.rating:not(:checked) > label:before {
+    content: '★ ';
+}
+
+.rating > input:checked ~ label {
+    color:rgb(248, 248, 85);
+    
+}
+
+.rating:not(:checked) > label:hover,
+.rating:not(:checked) > label:hover ~ label {
+    color: rgb(248, 248, 85);
+    
+}
+
+.rating > input:checked + label:hover,
+.rating > input:checked + label:hover ~ label,
+.rating > input:checked ~ label:hover,
+.rating > input:checked ~ label:hover ~ label,
+.rating > label:hover ~ input:checked ~ label {
+    color: rgb(248, 248, 85);
+    
+}
+
+.rating > label:active {
+    position:relative;
+    top:2px;
+    left:2px;
+}
+#labelcheck {
+  color: rgb(248, 248, 85);
+}
+
+#ratingComment {
+  margin-left: 125px;
+}
+
+
+
+
+
