@@ -23,7 +23,6 @@
       <a class="py-2 d-none d-md-inline-block" href="categories.html">Categorías</a>
       <a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>
       <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
-      <a class="py-2 d-none d-md-inline-block" href="cart.html">Mi carrito</a>
       <div class="dropdown show">
         <span>
           <i class="fas fa-user-circle py-2 d-none d-md-inline-block" id="userIcon"></i>
@@ -44,7 +43,7 @@
   <div class="card text-center" id="card">
     <div id="desc-prod">
     </div>
-    <div>
+    <div id="relatedProducts" class="card-deck"></div>
       <div class="card-footer text-muted">
         <button type="button" id="btn-comments" class="border border-dark shadow-lg p-2 mb-5 bg-white rounded "><i
             class="far fa-eye icon"></i> Ver comentarios</button>
@@ -58,68 +57,71 @@
         <div class="row"></div>
       </div>
     </div>
-
-  </div>
-  <div id="info-comment"></div>
-  <div id="new-comment">
-    <div class="tab-pane" id="add-comment">
-      <form action="#" method="post" class="form-horizontal" id="commentForm" role="form">
-        <div class="form-group row">
-          <label for="nickName" class="col-sm-2 col-form-label text-center mt-3">Usuario:</label>
-          <div class="col-sm-8">
-            <input type="text" class="form-control mt-3 " name="nickName" id="nickName"
-              placeholder="Ingrese su Usuario">
-          </div>
-          <div id="usererror" class="col-sm-10">Por favor ingrese su Usuario</div>
-        </div>
-        <div class="form-group row">
-          <label for="email" class="col-lg-2 col-form-label text-center mt-3">Comentario:</label>
-          <div class="col-sm-8">
-            <textarea class="form-control" name="addComment" id="addComment" rows="3"
-              placeholder="Ingrese aqui su comentario"></textarea>
-          </div>
-          <div id="texterror" class="col-sm-10">Por favor ingrese su comentario</div>
-        </div>
-        <div class="container" id="rating">
-          <div class="row">
-            <div class="rating" id="ratingComment">
-              <input type="radio" id="star5" name="rating" value="5" /><label class="labelRating" for="star5" title="Excelente">5
-                Estrellas</label>
-              <input type="radio" id="star4" name="rating" value="4" /><label class="labelRating"for="star4" title="Muy Bueno">4
-                Estrellas</label>
-              <input type="radio" id="star3" name="rating" value="3" /><label class="labelRating"for="star3" title="Bueno">3
-                Estrellas</label>
-              <input type="radio" id="star2" name="rating" value="2" /><label class="labelRating"for="star2" title="Malo">2
-                Estrellas</label>
-              <input type="radio" id="star1" name="rating" value="1" /><label class="labelRating" for="star1" title="Pesimo">1
-                Estrella</label>
+    <div id="info-comment"></div>
+    <div id="new-comment">
+      <div class="tab-pane" id="add-comment">
+        <form action="#" method="post" class="form-horizontal" id="commentForm" role="form">
+          <div class="form-group row">
+            <label for="nickName" class="col-sm-2 col-form-label text-center mt-3">Usuario:</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control mt-3 " name="nickName" id="nickName"
+                placeholder="Ingrese su Usuario">
             </div>
-            <span>
-              <h5 class="badge badge-secondary ">Calificación</h5>
-            </span>
+            <div id="usererror" class="col-sm-10">Por favor ingrese su Usuario</div>
           </div>
-        </div>
+          <div class="form-group row">
+            <label for="email" class="col-lg-2 col-form-label text-center mt-3">Comentario:</label>
+            <div class="col-sm-8">
+              <textarea class="form-control" name="addComment" id="addComment" rows="3"
+                placeholder="Ingrese aqui su comentario"></textarea>
+            </div>
+            <div id="texterror" class="col-sm-10">Por favor ingrese su comentario</div>
+          </div>
+          <div class="container" id="rating">
+            <div class="row">
+              <div class="rating" id="ratingComment">
+                <input type="radio" id="star5" name="rating" value="5" /><label class="labelRating" for="star5"
+                  title="Excelente">5
+                  Estrellas</label>
+                <input type="radio" id="star4" name="rating" value="4" /><label class="labelRating" for="star4"
+                  title="Muy Bueno">4
+                  Estrellas</label>
+                <input type="radio" id="star3" name="rating" value="3" /><label class="labelRating" for="star3"
+                  title="Bueno">3
+                  Estrellas</label>
+                <input type="radio" id="star2" name="rating" value="2" /><label class="labelRating" for="star2"
+                  title="Malo">2
+                  Estrellas</label>
+                <input type="radio" id="star1" name="rating" value="1" /><label class="labelRating" for="star1"
+                  title="Pesimo">1
+                  Estrella</label>
+              </div>
+              <span>
+                <h5 class="badge badge-secondary ">Calificación</h5>
+              </span>
+            </div>
+          </div>
 
-        <div class="form-group">
-          <div class="col-sm-offset-5 col-sm-10">
-            <button class="btn btn-success btn-circle" type="button" id="submitComment"><i
-                class="fas fa-paper-plane"></i> Publicar Comentario</button>
+          <div class="form-group">
+            <div class="col-sm-offset-5 col-sm-10">
+              <button class="btn btn-success btn-circle" type="button" id="submitComment"><i
+                  class="fas fa-paper-plane"></i> Publicar Comentario</button>
+            </div>
+            <button class="btn btn-primary" type="button" disabled id="btn-enviando">
+              <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+              Enviando...
+            </button>
+            <div id="commentexit" class="col-sm-10"><i class="fas fa-check-circle" id="check-ok"></i> Su comentario fue
+              enviado con éxito!</div>
+            <i class="fas fa-check-circle" id="check-ok"></i>
           </div>
-          <button class="btn btn-primary" type="button" disabled id="btn-enviando">
-            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-            Enviando...
-          </button>
-          <div id="commentexit" class="col-sm-10"><i class="fas fa-check-circle" id="check-ok"></i> Su comentario fue
-            enviado con éxito!</div>
-          <i class="fas fa-check-circle" id="check-ok"></i>
-        </div>
-      </form>
-    </div>
-    <script src="js/jquery-3.4.1.min.js"></script>
-    <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="js/init.js"></script>
-    <script src="js/product-info.js"></script>
-    <script src="js/login.js"></script>
+        </form>
+      </div>
+      <script src="js/jquery-3.4.1.min.js"></script>
+      <script src="js/bootstrap.bundle.min.js"></script>
+      <script src="js/init.js"></script>
+      <script src="js/product-info.js"></script>
+      <script src="js/login.js"></script>
 </body>
 
 </html>

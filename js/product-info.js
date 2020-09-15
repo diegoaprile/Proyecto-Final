@@ -1,5 +1,37 @@
 const url = "https://japdevdep.github.io/ecommerce-api/product/5678.json";
 const comment = "https://japdevdep.github.io/ecommerce-api/product/5678-comments.json";
+const related = "https://japdevdep.github.io/ecommerce-api/product/all.json";
+
+fetch(related)
+  .then(response => response.json())
+  .then(rel => {
+
+    let products = document.getElementById("relatedProducts");
+    products.innerHTML = `<div class="card-deck" style="width:20rem;" id="card1">
+    <div class="card related" style="width:100px;" height:"100px;">
+      <img src="${rel[1].imgSrc}" class="card-img-top mx-auto d-block" style="width:100px;" height:"100px;">
+      <div class="card-body">
+        <h5 class="card-title">${rel[1].name}</h5>
+        <p class="card-text">${rel[1].description}</p>
+        <p class="card-text">Costo: ${rel[1].currency} ${rel[1].cost}</p>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <div class="card-deck ml-1" style="width:20rem;" id="card2">
+    <div class="card related" style="width:100px;" height:"100px;">
+      <img src="${rel[3].imgSrc}" class="card-img-top mx-auto d-block" style="width:100px;" height:"100px;">
+      <div class="card-body">
+        <h5 class="card-title">${rel[3].name}</h5>
+        <p class="card-text">${rel[3].description}</p>
+        <p class="card-text">Costo: ${rel[3].currency} ${rel[3].cost}</p>
+      </div>
+    </div>
+  </div>
+  </div>
+  `
+  });
 
 fetch(url)
   .then(response => response.json())
@@ -13,31 +45,85 @@ fetch(url)
   <div class="card-body">
     <p class="card-text">${data.description}</p>
   </div>
-  <div class="row">
-<div class="col-md-4 ">
-    <img class="img-thumbnail" src="${data["images"][0]}"  width="250" height="250" >
-</div>
-<div class="col-md-4">
-    <img class="img-thumbnail" src="${data["images"][1]}"  width="250" height="250">
-</div>
-<div class="col-md-4">
-    <img class="img-thumbnail" src="${data["images"][2]}"  width="250" height="250">
-</div>
-<div class="col-md-4">
-    <img class="img-thumbnail" src="${data["images"][3]}"  width="250" height="250">
-</div>
-<div class="col-md-4">
-    <img class="img-thumbnail" src="${data["images"][4]}"  width="250" height="250">
+  <div class="container">
+  <div class="row blog">
+      <div class="col-md-12">
+          <div id="blogCarousel" class="carousel slide" data-ride="carousel">
+
+              <ol class="carousel-indicators">
+                  <li data-target="#blogCarousel" data-slide-to="0" class="active"></li>
+                  <li data-target="#blogCarousel" data-slide-to="1"></li>
+              </ol>
+
+              <!-- Carousel items -->
+              <div class="carousel-inner">
+
+                  <div class="carousel-item active">
+                      <div class="row">
+                          <div class="col-md-3">
+                              <a href="#">
+                                  <img src="${data["images"][0]}" alt="Image" style="max-width:100%;">
+                              </a>
+                          </div>
+                          <div class="col-md-3">
+                              <a href="#">
+                                  <img src="${data["images"][1]}" alt="Image" style="max-width:100%;">
+                              </a>
+                          </div>
+                          <div class="col-md-3">
+                              <a href="#">
+                                  <img src="${data["images"][2]}" alt="Image" style="max-width:100%;">
+                              </a>
+                          </div>
+                          <div class="col-md-3">
+                              <a href="#">
+                                  <img src="${data["images"][3]}" alt="Image" style="max-width:100%;">
+                              </a>
+                          </div>
+                      </div>
+                      <!--.row-->
+                  </div>
+                  <!--.item-->
+
+                  <div class="carousel-item">
+                      <div class="row">
+                          <div class="col-md-3">
+                              <a href="#">
+                                  <img src="${data["images"][4]}" alt="Image" style="max-width:100%;">
+                              </a>
+                          </div>
+                          <div class="col-md-3">
+                              <a href="#">
+                                  <img src="${data["images"][0]}" alt="Image" style="max-width:100%;">
+                              </a>
+                          </div>
+                          <div class="col-md-3">
+                              <a href="#">
+                                  <img src="${data["images"][1]}" alt="Image" style="max-width:100%;">
+                              </a>
+                          </div>
+                          <div class="col-md-3">
+                              <a href="#">
+                                  <img src="${data["images"][2]}" alt="Image" style="max-width:100%;">
+                              </a>
+                          </div>
+                      </div> 
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
 </div>
 <div class="card-body text-center">
-<p class"card-text"> Categoria: ${data.category} <br/> Costo: ${data.currency} ${data.cost} <br/> Vendidos: ${data.soldCount} <br/>  Productos relacionados:${data.relatedProducts} </p>
-</div>
+<p class"card-text"> Categoria: ${data.category} <br/> Costo: ${data.currency} ${data.cost} <br/> Vendidos: ${data.soldCount}
+<h4 class="productRelated">También te podría interesar:</h4>
+
 </div>
  
 `
   })
   .catch(err => console.log(err));
-  
+
 fetch(comment)
   .then(response => response.json())
   .then(comments => {
@@ -47,12 +133,12 @@ fetch(comment)
       let com = comments[i];
       let score = '';
       let emptyStars = 5 - com.score;
-      
 
-      for(let i = 1; i <= emptyStars; i++){
+
+      for (let i = 1; i <= emptyStars; i++) {
         score += `<p class="rating" id="${i + com.score}"></p><label for="${i + com.score}"></label>`
       }
-      for(let i = 1; i <= com.score; i++){
+      for (let i = 1; i <= com.score; i++) {
         score += `<p class="rating"></p><label id="labelcheck"></label>`
       }
 
@@ -91,7 +177,7 @@ fetch(comment)
                                 `
 
     }
-   
+
 
   })
   .catch(err => console.log(err))
@@ -123,10 +209,10 @@ errorUser = document.getElementById("usererror");
 submit = document.getElementById("submitComment");
 exit = document.getElementById("commentexit");
 check = document.getElementById("check-ok");
-    var date = new Date();
-    var fecha =   date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
-    var hora = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
-    var fechaYHora = fecha + " " + hora;
+var date = new Date();
+var fecha = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+var hora = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+var fechaYHora = fecha + " " + hora;
 submit.addEventListener("click", () => {
   if (user.value == "" || user.value == null) {
     user.classList.add("borderojo");
@@ -154,12 +240,12 @@ submit.addEventListener("click", () => {
     let element = document.getElementById("info-comment")
     score = " ";
     let emptyStars = 5 - rating;
-    for(let i = 1; i <= emptyStars; i++){
-    score += `<p class="rating" id="${i + rating}"></p><label for="${i + rating}"></label>`
-  }for (let i = 1; i<= rating; i++){
-    score += `<p class="rating"></p><label id="labelcheck"></label>`
-}
-    element.innerHTML +=  `<div class="container border border-success mt-3 rounded bg-light shadow p-3 mb-5 bg-white rounded">
+    for (let i = 1; i <= emptyStars; i++) {
+      score += `<p class="rating" id="${i + rating}"></p><label for="${i + rating}"></label>`
+    } for (let i = 1; i <= rating; i++) {
+      score += `<p class="rating"></p><label id="labelcheck"></label>`
+    }
+    element.innerHTML += `<div class="container border border-success mt-3 rounded bg-light shadow p-3 mb-5 bg-white rounded">
     <div class="row">
       <div class="col-sm-10 col-sm-offset-1" id="logout">
           <div class="comment-tabs">
@@ -194,7 +280,7 @@ submit.addEventListener("click", () => {
 
     user.value = "";
     comentario.value = "";
-    
+
 
   }
 
