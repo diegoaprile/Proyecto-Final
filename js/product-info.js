@@ -21,7 +21,7 @@ fetch(related)
 
   <div class="card-deck ml-1" style="width:20rem;" id="card2">
     <div class="card related" style="width:100px;" height:"100px;">
-      <img src="${rel[3].imgSrc}" class="card-img-top mx-auto d-block" style="width:100px;" height:"100px;">
+      <img src="${rel[2].imgSrc}" class="card-img-top mx-auto d-block" style="width:100px;" height:"100px;">
       <div class="card-body">
         <h5 class="card-title">${rel[3].name}</h5>
         <p class="card-text">${rel[3].description}</p>

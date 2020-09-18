@@ -252,10 +252,16 @@ html {
  text-align: left;
   max-width: 50%;
 }
+.related {
+  transition: transform .5s;
+  
+}
 .related:hover{
   box-shadow: 1px 1px 5px 1px rgb(16, 128, 50);
   margin-bottom: 10px;
   margin-top: 10px;
+  transform: scale(1.1);
+    cursor: pointer;
 }
 #relatedProducts {
   max-width: 45%;
