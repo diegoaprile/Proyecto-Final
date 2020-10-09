@@ -181,6 +181,7 @@ fetch(comment)
 
   })
   .catch(err => console.log(err))
+
 botonComentario = document.getElementById("btn-comment");
 botonOcultar = document.getElementById("btn-nocomments");
 boton = document.getElementById("btn-comments");
@@ -236,6 +237,9 @@ submit.addEventListener("click", () => {
     check.style.display = "inline";
     sessionStorage.setItem("nick", user.value);
     sessionStorage.setItem("comment", comentario.value);
+
+
+    
     var rating = document.querySelector('input[name="rating"]:checked').value;
     let element = document.getElementById("info-comment")
     score = " ";

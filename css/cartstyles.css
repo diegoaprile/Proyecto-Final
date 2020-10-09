@@ -1,0 +1,374 @@
+.cart-wrap {
+    padding: 40px 0;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.main-heading {
+    font-size: 19px;
+    margin-bottom: 20px;
+}
+
+ .table-cart table {
+    width: 100%;
+}
+
+.table-cart thead {
+    border-bottom: 1px solid #e5e5e5;
+    margin-bottom: 5px;
+}
+
+
+
+.table-cart tr td {
+    vertical-align: middle;
+}
+
+.table-cart tr td:nth-child(2) {
+    width: 26%;
+}
+
+.table-cart tr td:nth-child(3) {
+    width: 15.333%;
+}
+
+.table-cart tr td .img-product {
+    width: 72px;
+    float: left;
+    margin-left: 8px;
+    margin-right: 31px;
+    line-height: 63px;
+}
+
+.table-cart tr td .img-product img {
+    width: 100%;
+}
+
+.table-cart tr td .name-product {
+    font-size: 15px;
+    color: #484848;
+    padding-top: 8px;
+    line-height: 24px;
+    width: 100%;
+}
+
+.table-cart tr td .price {
+    text-align: right;
+    margin-right: 40px;
+    color: #989898;
+    font-size: 16px;
+    max-width: 100%;
+}
+
+.table-cart tr td .quanlity {
+    position: relative;
+} 
+
+.product-count, .product-count {
+    width: 34px;
+    height: 34px;
+    background: transparent;
+    text-align: center;
+    font-size: 19px;
+    line-height: 34px;
+    color: #000;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.product-count {
+    line-height: 32px;
+}
+
+.product-count {
+    border-radius: 3px 3 3 3px;
+}
+
+.product-count {
+    border-radius: 0 3px 3px 0;
+}
+
+.product-count .qty {
+    width: 60px;
+    text-align: center;
+    border: none;
+}
+
+.count-inlineflex {
+    display: inline-flex;
+    border: solid 2px #ccc;
+    border-radius: 20px;
+}
+
+.total {
+    font-size: 24px;
+    font-weight: 600;
+    color: #8660e9;
+}
+
+.display-flex {
+    display: flex;
+}
+
+.align-center {
+    align-items: center;
+}
+
+.coupon-box {
+    padding: 63px 0 58px;
+    text-align: center;
+    border: 2px dotted #e5e5e5;
+    border-radius: 10px;
+    margin-top: 55px;
+}
+
+.coupon-box form input {
+    display: inline-block;
+    width: 264px;
+    margin-right: 13px;
+    height: 44px;
+    border-radius: 25px;
+    border: solid 2px #cccccc;
+    padding: 5px 15px;
+    font-size: 14px;
+}
+
+input:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.round-black-btn {
+    border-radius: 25px;
+    background: rgb(41, 39, 39);
+    color: #fff;
+    padding: 8px 35px;
+    display: inline-block;
+    border: solid 2px black;
+    transition: all 0.5s ease-in-out 0s;
+    cursor: pointer;
+}
+
+.round-black-btn:hover, .round-black-btn:focus {
+    background: transparent;
+    color: #212529;
+    text-decoration: none;
+}
+
+.cart-totals {
+    border-radius: 3px;
+    background: #e7e7e7;
+    padding: 25px;
+}
+
+.cart-totals h3 {
+    font-size: 19px;
+    color: #3c3c3c;
+    letter-spacing: 1px;
+    font-weight: 500;
+}
+
+.cart-totals table {
+    width: 100%;
+}
+
+.cart-totals table tr th, .cart-totals table tr td {
+    width: 50%;
+    padding: 3px 0;
+    vertical-align: middle;
+}
+
+.cart-totals table tr td:last-child {
+    text-align: right;
+}
+
+.cart-totals table tr td.subtotal {
+    font-size: 20px;
+    color: #6f6f6f;
+}
+
+.cart-totals table tr td.free-shipping {
+    font-size: 14px;
+    color: #6f6f6f;
+}
+
+.cart-totals table tr.total-row td {
+    padding-top: 25px;
+}
+
+.cart-totals table tr td.price-total {
+    font-size: 24px;
+    font-weight: 600;
+    color: #8660e9;
+}
+
+.btn-cart-totals {
+    text-align: center;
+    margin-top: 60px;
+    margin-bottom: 20px;
+}
+
+.btn-cart-totals .round-black-btn {
+    margin: 10px 0;
+}
+/* Estilos de la tabla de productos y botones*/
+#micarrito{
+    text-align: center;
+    font-size: 50px;
+}
+
+#listProduct{
+    box-sizing: unset;
+    } 
+#price {
+    margin-top: 30px !important;
+}
+#cantidad{
+    text-decoration: none;
+    border: none;
+    width: 40%;
+}
+
+.btn-mount{
+    text-decoration: none;
+    border: none;
+    background-color: white;
+
+}
+.count{
+    width: 15%;
+    border: none;
+    text-align: center;
+}
+
+#trash {
+    color: rgb(211, 24, 24);
+    background: none;
+    border: none;
+}
+#delete {
+    background: no;
+}
+.del-btn {
+   background: none;
+    border: none;
+}
+.round-black-btn:hover{
+    cursor: pointer;
+}
+table,tr, th, td {
+    text-align: center;
+}
+
+.tdtable {
+    text-align: left !important;
+}
+
+.content-product {
+    width: 100%;
+    border-bottom: solid 1px black;
+}
+
+.name{
+    margin-bottom: 0px;
+}
+
+.container {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.row {
+    width: 65%;
+}
+
+.col-lg-4 {
+    width: 35%;
+}
+/* Estilos de la seccion envio*/
+#green {
+    color: green;
+}
+
+#yellow {
+    color: yellow;
+}
+
+#red {
+    color: red;
+}
+
+#modal {
+    display: none;
+
+}
+#dialog {
+    margin-top: 50px;
+}
+#cont:hover{
+    cursor: pointer;
+}
+
+#envio{
+    text-align: center;
+}
+
+#metodo {
+    display: none;
+}
+
+/* Estilos de la seccion pagos*/
+
+.card {
+    font-size: 50px;
+}
+.card:hover{
+    cursor: pointer;
+    border: green 1px solid;
+}
+
+#visa {
+    color: rgb(28, 28, 146);
+}
+
+#mastercard{
+    color: rgb(204, 26, 26)
+}
+
+#amex{
+    color: rgb(106, 115, 248)
+}
+
+#diners{
+    color: rgb(68, 68, 95)
+}
+
+#pagocard{
+display: none;
+}
+
+#transfer {
+    display: none;
+}
+.transfer:hover{
+    cursor: pointer;
+    border: green 1px solid;
+}
+
+#pay {
+    display: none;
+}
+.types:hover {
+    background-color: rgb(193, 212, 197);
+    transition: all 0.5s ease-in-out 0s;
+    color: rgb(44, 39, 39);
+}
+
+/* Validacion de formulario */
+
+.error {
+    border: 1px solid red;
+}
+
+.activo:focus {
+    border: green;
+}
