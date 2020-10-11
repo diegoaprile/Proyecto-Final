@@ -263,10 +263,7 @@ html {
   transform: scale(1.1);
     cursor: pointer;
 }
-#relatedProducts {
-  max-width: 45%;
 
-}
 #card1 {
   float: left;
 }

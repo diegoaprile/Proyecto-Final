@@ -7,8 +7,10 @@ fetch(related)
   .then(rel => {
 
     let products = document.getElementById("relatedProducts");
-    products.innerHTML = `<div class="card-deck" style="width:20rem;" id="card1">
-    <div class="card related" style="width:100px;" height:"100px;">
+    products.innerHTML = `
+    <row>
+    <div class="col">
+    <div class="card related">
       <img src="${rel[1].imgSrc}" class="card-img-top mx-auto d-block" style="width:100px;" height:"100px;">
       <div class="card-body">
         <h5 class="card-title">${rel[1].name}</h5>
@@ -16,11 +18,12 @@ fetch(related)
         <p class="card-text">Costo: ${rel[1].currency} ${rel[1].cost}</p>
       </div>
     </div>
-  </div>
-  </div>
+    </div>
+    </row>
 
-  <div class="card-deck ml-1" style="width:20rem;" id="card2">
-    <div class="card related" style="width:100px;" height:"100px;">
+  <row>
+    <div class="col">
+    <div class="card related">
       <img src="${rel[2].imgSrc}" class="card-img-top mx-auto d-block" style="width:100px;" height:"100px;">
       <div class="card-body">
         <h5 class="card-title">${rel[3].name}</h5>
@@ -28,8 +31,8 @@ fetch(related)
         <p class="card-text">Costo: ${rel[3].currency} ${rel[3].cost}</p>
       </div>
     </div>
-  </div>
-  </div>
+    </div>
+    </row>
   `
   });
 

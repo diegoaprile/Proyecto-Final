@@ -19,11 +19,11 @@ fetch(cart)
                  </td>
                 <td id="price-${i + 1}"> ${cart.currency} $ ${cart.unitCost}</td>
                 <td>
-                <button class="btn-mount"id="disminuir-${i + 1}"> - </button>
+                <button class="btn-mount" id="disminuir-${i + 1}"> - </button>
                 <input class="count"type='text' id="cantidad-${i + 1}" value="${cart.count}"> 
                 <button class="btn-mount" id="aumentar-${i + 1}"> + </button>
                 </td>
-                <td id="product-${i + 1}-subtotal">
+                <td id="product-${i + 1}-subtotal" class = "prueba">
                 </td>
                 <td><button class= "del-btn" id="delete-${i + 1}"><i class="fas fa-trash" id="trash"></button></i></td>
                 </tr>       
@@ -38,22 +38,18 @@ fetch(cart)
       let aumentarBtn = document.getElementById(`aumentar-${j + 1}`);
       let cantidad = document.getElementById(`cantidad-${j + 1}`);
       let subtotal = document.getElementById(`product-${j + 1}-subtotal`);
-
       let del = document.getElementById(`product-${j + 1}`)
       let trash = document.getElementById(`delete-${j + 1}`);
       trash.addEventListener("click", () => {
         del.innerHTML = "";
-
       })
+
       // Se llama a la funcion para que cargue los costos que ya vienen en el json.
       actualizarSubtotal(subtotal, cart.unitCost, cantidad.value, cart.currency);
-
       // Se le pasan los paramentros que consisten en cantidad (input), costo por unidad, elemento subtotal y la moneda.
       disminuirBtn.addEventListener('click', () => disminuir(cantidad, cart.unitCost, subtotal, cart.currency));
       aumentarBtn.addEventListener('click', () => aumentar(cantidad, cart.unitCost, subtotal, cart.currency));
     }
-
-
   })
   .catch(err => console.log(err));
 //Se le pasan como parametros: el subtotal a actualizar, el precio unitario, la cantidad y la moneda. Si la moneda llega en dolares, se multiplica el precio unitario por el valor del dolar.
@@ -61,12 +57,17 @@ function actualizarSubtotal(subtotalActualizar, precioUnitario, cantidad, moneda
   if (moneda == 'USD') {
     subtotalActualizar.innerHTML = "$" + (precioUnitario * 40) * cantidad;
   } else {
-    subtotalActualizar.innerHTML = "$" + " " + precioUnitario * cantidad;
     sub = document.getElementById("subtotal");
-    total = document.getElementById("total");
-    sub.innerHTML = `<td class="subtotal" id="subtotal"> $ ${parseInt(precioUnitario * cantidad)}</td>`
-    total.innerHTML = `<td class="price-total" id="total"> $ ${parseInt(precioUnitario * cantidad)}</td>`
+  total = document.getElementById("total");
+    subtotalActualizar.innerHTML = "$" + " " + precioUnitario * cantidad;
+    sub.innerHTML = `<td class="subtotal" id="subtotal"> $ ${parseFloat(precioUnitario * cantidad)} </td>`
+  total.innerHTML = `<td class="price-total" id="total"> $ ${precioUnitario * cantidad}</td>`
   }
+  let tabla = document.getElementById("tabla");
+  let filas = tabla.getElementsByClassName("prueba").value;
+  
+  
+  
 }
 
 function aumentar(cantidad, precioUnitario, subtotal, moneda) {
@@ -81,19 +82,13 @@ function disminuir(cantidad, precioUnitario, subtotal, moneda) {
   actualizarSubtotal(subtotal, precioUnitario, cantidad.value, moneda);
 }
 
-
 envio = document.getElementById("pagos");
 // Funcion que muestra la ventana modal del metodo de envio
 envio.addEventListener("click", () => {
   $('#modal').modal('show')
 })
 //Funcion que oculta el modal de envio y muestra el metodo de pago
-metodo = document.getElementById("pago");
-metodo.addEventListener("click", () => {
-  $("#modal").modal("hide")
-  $('#metodo').modal('show')
 
-})
 
 opcion1 = document.getElementById("opcion1");
 opcion2 = document.getElementById("opcion2");
@@ -123,7 +118,7 @@ let esq = document.getElementById("esquina");
 let puerta = document.getElementById("numero");
 let pais = document.getElementById("pais");
 let dpto = document.getElementById("dep");
-let next = document.getElementById("pago");
+var next = document.getElementById("pago");
 let errorDir = document.getElementById("errorDir");
 let errorCalle = document.getElementById("errorCalle");
 let errorEsq = document.getElementById("errorEsq");
@@ -137,32 +132,36 @@ next.addEventListener("click", () => {
   if (dir.value == "" || dir.value == null) {
     dir.classList.add("error");
     errorDir.style.display = "block";
-    next.setAttribute("disabled", true);
+
   } if (calle.value == "" || calle.value == null) {
     calle.classList.add("error")
     errorCalle.style.display = "block"
-    next.setAttribute("disabled", true);
   } if (esq.value == "" || esq.value == null) {
     esq.classList.add("error")
     errorEsq.style.display = "block"
-    next.setAttribute("disabled", true);
   } if (puerta.value == "" || puerta.value == null) {
     puerta.classList.add("error")
     errorPuerta.style.display = "block"
-    next.setAttribute("disabled", true);
   } if (lista.selectedIndex == null || lista.selectedIndex == 0) {
     pais.classList.add("error")
     errorPais.style.display = "block"
-    next.setAttribute("disabled", true);
   } if (listaDep.selectedIndex == null || listaDep.selectedIndex == 0) {
     listaDep.classList.add("error")
     errorDep.style.display = "block"
-    next.setAttribute("disabled", true);
+  } else {
+    $('#modal').modal('hide')
+    $('#metodo').modal('show')
   }
-
-
+  dir.classList.remove("error");
+  errorDir.style.display = "none";
+  calle.classList.remove("error");
+  errorCalle.style.display = "none";
+  esq.classList.remove("error")
+  errorEsq.style.display = "none"
+  puerta.classList.remove("error")
+  errorPuerta.style.display = "none"
+  pais.classList.remove("error")
 })
-
 
 fetch(country)
   .then(response => response.json())
@@ -170,13 +169,20 @@ fetch(country)
     let listCountry = document.getElementById("pais");
     for (let i = 0; i < paises.countries.length; i++) {
       let pais = paises.countries[i];
-      listCountry.innerHTML = `
-      <option selected disabled value="">Pais</option>
-                <option>${pais.name}</option>
-      `
+      // Creo el elemento option 
+      let opcion = document.createElement("option");
+      opcion.setAttribute("id", "option")
+      // Creo el textnode con los paises
+      let texto = document.createTextNode(pais.name);
+      //Al option le hago el append de texto
+      opcion.appendChild(texto);
+      //Al elemento con el id pais le hago el append de opcion
+      listCountry.appendChild(opcion);
+
     }
+    //Uso una funcion de jquery, que le asigna un valor al elemento con Id pais.
+    $(document).ready(function(){
+      $("#pais").val("Uruguay");
+    });
   })
   .catch(err => console.log(err));
-
-
-

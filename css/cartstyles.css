@@ -17,8 +17,6 @@
     margin-bottom: 5px;
 }
 
-
-
 .table-cart tr td {
     vertical-align: middle;
 }
@@ -316,6 +314,14 @@ table,tr, th, td {
     display: none;
 }
 
+.envios {
+    background-color: transparent !important;
+}
+.envios:hover{
+    background-color: rgb(192, 192, 192) !important;
+    transition: all 0.5s ease-in-out 0s;
+}
+
 /* Estilos de la seccion pagos*/
 
 .card {
@@ -324,6 +330,7 @@ table,tr, th, td {
 .card:hover{
     cursor: pointer;
     border: green 1px solid;
+    transition: all 0.5s ease-in-out 0s;
 }
 
 #visa {
