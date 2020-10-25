@@ -1,5 +1,6 @@
 const cart = "https://japdevdep.github.io/ecommerce-api/cart/654.json";
-const country = "https://raw.githubusercontent.com/millan2993/countries/master/json/countries.json"
+const country = "https://raw.githubusercontent.com/millan2993/countries/master/json/countries.json";
+const mensajeExito = "https://japdevdep.github.io/ecommerce-api/cart/buy.json";
 fetch(cart)
   .then(response => response.json())
   .then(carrito => {
@@ -19,14 +20,12 @@ fetch(cart)
                  </td>
                 <td id="price-${i + 1}"> ${cart.currency} $ ${cart.unitCost}</td>
                 <td>
-                <button class="btn-mount" id="disminuir-${i + 1}"> - </button>
-                <input class="count"type='text' id="cantidad-${i + 1}" value="${cart.count}"> 
-                <button class="btn-mount" id="aumentar-${i + 1}"> + </button>
+                <input class="count"type='number' min='1' id="cantidad-${i + 1}" value="${cart.count}"> 
                 </td>
-                <td id="product-${i + 1}-subtotal" class = "prueba">
+                <td id="product-${i + 1}-subtotal" class="subtotalTd">
                 </td>
                 <td><button class= "del-btn" id="delete-${i + 1}"><i class="fas fa-trash" id="trash"></button></i></td>
-                </tr>       
+                </tr>      
           `
     };
     // Bucle que itera nuevamente el json y agrega los EventListener a los botones y a la cantidad. 
@@ -34,134 +33,136 @@ fetch(cart)
     for (let j = 0; j < carrito.articles.length; j++) {
       let cart = carrito.articles[j];
 
-      let disminuirBtn = document.getElementById(`disminuir-${j + 1}`);
-      let aumentarBtn = document.getElementById(`aumentar-${j + 1}`);
       let cantidad = document.getElementById(`cantidad-${j + 1}`);
       let subtotal = document.getElementById(`product-${j + 1}-subtotal`);
       let del = document.getElementById(`product-${j + 1}`)
       let trash = document.getElementById(`delete-${j + 1}`);
       trash.addEventListener("click", () => {
         del.innerHTML = "";
+        obtenerSubtotalItems();
       })
+      envio = document.getElementById("pagos");
+      enviosGrupo = document.getElementById("enviosGrupo");
+      errorEnvio = document.getElementById("errorEnvio");
+      // Validación de seleccion de método de envío 
+
+      envio.addEventListener("click", () => {
+        if (document.getElementById('check').style.display == "inline" || document.getElementById('check1').style.display == "inline" || document.getElementById('check2').style.display == "inline") {
+          $('#modal').modal('show')
+        } else  {
+          enviosGrupo.classList.add("error");
+          errorEnvio.style.display= "block";
+        }
+      });
+
 
       // Se llama a la funcion para que cargue los costos que ya vienen en el json.
       actualizarSubtotal(subtotal, cart.unitCost, cantidad.value, cart.currency);
       // Se le pasan los paramentros que consisten en cantidad (input), costo por unidad, elemento subtotal y la moneda.
-      disminuirBtn.addEventListener('click', () => disminuir(cantidad, cart.unitCost, subtotal, cart.currency));
-      aumentarBtn.addEventListener('click', () => aumentar(cantidad, cart.unitCost, subtotal, cart.currency));
+      cantidad.addEventListener('click', () => aumentar(cantidad, cart.unitCost, subtotal, cart.currency, false, tipoEnvio));
+      cantidad.addEventListener('click', () => aumentar(cantidad, cart.unitCost, subtotal, cart.currency, true, tipoEnvio));
     }
+    obtenerSubtotalItems();
   })
   .catch(err => console.log(err));
 //Se le pasan como parametros: el subtotal a actualizar, el precio unitario, la cantidad y la moneda. Si la moneda llega en dolares, se multiplica el precio unitario por el valor del dolar.
 function actualizarSubtotal(subtotalActualizar, precioUnitario, cantidad, moneda) {
   if (moneda == 'USD') {
     subtotalActualizar.innerHTML = "$" + (precioUnitario * 40) * cantidad;
+
   } else {
-    sub = document.getElementById("subtotal");
-  total = document.getElementById("total");
     subtotalActualizar.innerHTML = "$" + " " + precioUnitario * cantidad;
-    sub.innerHTML = `<td class="subtotal" id="subtotal"> $ ${parseFloat(precioUnitario * cantidad)} </td>`
-  total.innerHTML = `<td class="price-total" id="total"> $ ${precioUnitario * cantidad}</td>`
   }
-  let tabla = document.getElementById("tabla");
-  let filas = tabla.getElementsByClassName("prueba").value;
-  
-  
-  
 }
-
-function aumentar(cantidad, precioUnitario, subtotal, moneda) {
-  cantidad.value = parseInt(cantidad.value) + 1; //Se obtiene el valor del input, y se incrementa en 1 el valor que tenga (Se utiliza parseInt para transformar el string en numero).
-  //Luego de ejecutarse la funcion aumentar, se llama a la funcion actualizarSubtotal donde muestra el monto actualizado.
-  actualizarSubtotal(subtotal, precioUnitario, cantidad.value, moneda);
+// Funcion que convierte el string que recibe de "subtotal" a type number
+function limpiarSubtotal(subtotal) {
+  subtotalPrecio = subtotal.replace(/\D/g, "") * 1;
+  return subtotalPrecio;
 }
-
-function disminuir(cantidad, precioUnitario, subtotal, moneda) {
-  cantidad.value = parseInt(cantidad.value) - 1; //se obtiene el valor del input, y se decrementa en 1 el valor que tenga.
-  //Luego de ejecutarse la funcion disminuir, se llama a la funcion actualizarSubtotal donde muestra el monto actualizado.
-  actualizarSubtotal(subtotal, precioUnitario, cantidad.value, moneda);
+// Funcion que llama a todos los elementos con class "subtotalTd", se inicializa una variable con valor 0 
+// Y por cada elemento de la variable subtotal se llama a la funcion limpiar subtotal para convertir el contenido del elemento
+// en un numero y se lo concatena con la variable subtotalTotal
+function obtenerSubtotalItems() {
+  let subtotal = document.querySelectorAll('.subtotalTd');
+  let subtotalTotal = 0;
+  subtotal.forEach(element => {
+    subtotalItem = limpiarSubtotal(element.innerHTML);
+    subtotalTotal += subtotalItem;
+  });
+  document.getElementById("subtotal").innerHTML = `<td class="subtotal" id="subtotal"> $ ${subtotalTotal} </td>`
+  total.innerHTML = `<td class="price-total" id="total"> $ ${parseFloat(subtotalTotal)}</td>`
+  return subtotalTotal;
 }
-
-envio = document.getElementById("pagos");
-// Funcion que muestra la ventana modal del metodo de envio
-envio.addEventListener("click", () => {
-  $('#modal').modal('show')
-})
-//Funcion que oculta el modal de envio y muestra el metodo de pago
-
-
-opcion1 = document.getElementById("opcion1");
-opcion2 = document.getElementById("opcion2");
-opcion3 = document.getElementById("opcion3");
-//Evento que muestra el pago con tarjetas y oculta las otras opciones
-opcion1.addEventListener("click", () => {
-  document.getElementById("pagocard").style.display = "block"
-  opcion2.style.display = "none"
-  opcion3.style.display = "none"
-})
-//Evento que muestra el pago con transferencia y oculta las otras opciones
-opcion2.addEventListener("click", () => {
-  document.getElementById("transfer").style.display = "block"
-  opcion1.style.display = "none"
-  opcion3.style.display = "none"
-})
-//Evento que muestra el pago con paypal y oculta las otras opciones
-opcion3.addEventListener("click", () => {
-  document.getElementById("pay").style.display = "block"
-  opcion1.style.display = "none"
-  opcion2.style.display = "none"
-})
-
-let dir = document.getElementById("direccion");
-let calle = document.getElementById("calle");
-let esq = document.getElementById("esquina");
-let puerta = document.getElementById("numero");
-let pais = document.getElementById("pais");
-let dpto = document.getElementById("dep");
-var next = document.getElementById("pago");
-let errorDir = document.getElementById("errorDir");
-let errorCalle = document.getElementById("errorCalle");
-let errorEsq = document.getElementById("errorEsq");
-let errorPuerta = document.getElementById("errorPuerta");
-let errorPais = document.getElementById("errorPais");
-var errorDep = document.getElementById("errorDep");
-var lista = document.getElementById("pais");
-var listaDep = document.getElementById("dep");
-
-next.addEventListener("click", () => {
-  if (dir.value == "" || dir.value == null) {
-    dir.classList.add("error");
-    errorDir.style.display = "block";
-
-  } if (calle.value == "" || calle.value == null) {
-    calle.classList.add("error")
-    errorCalle.style.display = "block"
-  } if (esq.value == "" || esq.value == null) {
-    esq.classList.add("error")
-    errorEsq.style.display = "block"
-  } if (puerta.value == "" || puerta.value == null) {
-    puerta.classList.add("error")
-    errorPuerta.style.display = "block"
-  } if (lista.selectedIndex == null || lista.selectedIndex == 0) {
-    pais.classList.add("error")
-    errorPais.style.display = "block"
-  } if (listaDep.selectedIndex == null || listaDep.selectedIndex == 0) {
-    listaDep.classList.add("error")
-    errorDep.style.display = "block"
+// Funcion que verifica su "aumentado" es true o false y aumenta o disminuye la cantidad en 1 segun su condicion
+function aumentar(cantidad, precioUnitario, subtotal, moneda, aumentado, tipoEnvio) {
+  let cantidadAumentado = 0;
+  if (aumentado) {
+    cantidadAumentado = 1;
   } else {
-    $('#modal').modal('hide')
-    $('#metodo').modal('show')
+    cantidadAumentado = -1;
   }
-  dir.classList.remove("error");
-  errorDir.style.display = "none";
-  calle.classList.remove("error");
-  errorCalle.style.display = "none";
-  esq.classList.remove("error")
-  errorEsq.style.display = "none"
-  puerta.classList.remove("error")
-  errorPuerta.style.display = "none"
-  pais.classList.remove("error")
+
+  cantidad.value = parseInt(cantidad.value) + cantidadAumentado; //Se obtiene el valor del input, y se incrementa en 1 el valor que tenga (Se utiliza parseInt para transformar el string en numero).
+  //Luego de ejecutarse la funcion aumentar, se llama a la funcion actualizarSubtotal donde muestra el monto actualizado y se actualiza el costo del envio.
+  actualizarSubtotal(subtotal, precioUnitario, cantidad.value, moneda);
+  let subtotalTotal = obtenerSubtotalItems();
+  calculaPorcentajes(subtotalTotal, tipoEnvio);
+}
+
+tipoEnvio = '';
+premium = document.getElementById("premium");
+express = document.getElementById("express");
+standard = document.getElementById("standard");
+
+// Funcion que analiza que tipo de envio le llega y actua en los diferentes casos.
+function calculaPorcentajes(subSuma, tipoEnvio) {
+  switch (tipoEnvio) {
+    case 'premium':
+      envioTd.innerHTML = `<ltd class="free-shipping"> $ ${parseInt(Math.floor(subSuma * 15) / 100)}</td>`
+      total.innerHTML = `<td class="price-total" id="total"> $ ${subSuma + parseInt(Math.floor(subSuma * 15) / 100)}</td>`
+      break;
+    case 'express':
+      envioTd.innerHTML = `<td class="free-shipping"> $ ${parseInt(Math.floor(subSuma * 7) / 100)}</td>`
+      total.innerHTML = `<td class="price-total" id="total"> $ ${subSuma + parseInt(Math.floor(subSuma * 7) / 100)}</td>`
+      break;
+    case 'standard':
+      envioTd.innerHTML = `<td class="free-shipping"> $ ${parseInt(Math.floor(subSuma * 5) / 100)}</td>`
+      total.innerHTML = `<td class="price-total" id="total"> $ ${subSuma + parseInt(Math.floor(subSuma * 5) / 100)}</td>`
+      break;
+  }
+
+}
+
+envioTd = document.getElementById("envioTd")
+
+premium.addEventListener("click", () => {
+  tipoEnvio = 'premium';
+  obtenerSubtotalItems('premium');
+  document.getElementById('check').style.display = "inline"
+  document.getElementById('check1').style.display = "none"
+  document.getElementById('check2').style.display = "none"
+  envioTd.innerHTML = `<ltd class="free-shipping"> $ ${parseInt(Math.floor(obtenerSubtotalItems() * 15) / 100)}</td>`
+  total.innerHTML = `<td class="price-total" id="total"> $ ${obtenerSubtotalItems() + parseInt(Math.floor(obtenerSubtotalItems() * 15) / 100)}</td>`
 })
+express.addEventListener("click", () => {
+  tipoEnvio = 'express';
+  obtenerSubtotalItems('express')
+  document.getElementById('check1').style.display = "inline"
+  document.getElementById('check').style.display = "none"
+  document.getElementById('check2').style.display = "none"
+  envioTd.innerHTML = `<td class="free-shipping"> $ ${parseInt(Math.floor(obtenerSubtotalItems() * 7) / 100)}</td>`
+  total.innerHTML = `<td class="price-total" id="total"> $ ${obtenerSubtotalItems() + parseInt(Math.floor(obtenerSubtotalItems() * 7) / 100)}</td>`
+})
+standard.addEventListener("click", () => {
+  tipoEnvio = 'standard';
+  obtenerSubtotalItems('standard')
+  document.getElementById('check2').style.display = "inline"
+  document.getElementById('check1').style.display = "none"
+  document.getElementById('check').style.display = "none"
+  envioTd.innerHTML = `<td class="free-shipping"> $ ${parseInt(Math.floor(obtenerSubtotalItems() * 5) / 100)}</td>`
+  total.innerHTML = `<td class="price-total" id="total"> $ ${obtenerSubtotalItems() + parseInt(Math.floor(obtenerSubtotalItems() * 5) / 100)}</td>`
+});
+
 
 fetch(country)
   .then(response => response.json())
@@ -181,8 +182,219 @@ fetch(country)
 
     }
     //Uso una funcion de jquery, que le asigna un valor al elemento con Id pais.
-    $(document).ready(function(){
+    $(document).ready(function () {
       $("#pais").val("Uruguay");
     });
   })
   .catch(err => console.log(err));
+
+let dir = document.getElementById("direccion");
+let calle = document.getElementById("calle");
+let puerta = document.getElementById("numero");
+let esq = document.getElementById("esquina");
+let dpto = document.getElementById("dep");
+//Mensajes de error
+let errorDir = document.getElementById("errorDir");
+let errorCalle = document.getElementById("errorCalle");
+let errorPuerta = document.getElementById("errorPuerta");
+let errorEsq = document.getElementById("errorEsq");
+let next = document.getElementById("pago");
+// Validación del formulario de envío
+next.addEventListener("click", () => {
+  if (dir.value == "" || dir.value == null) {
+    dir.classList.add("error");
+    errorDir.style.display = "block";
+
+  } if (calle.value == "" || calle.value == null) {
+    calle.classList.add("error")
+    errorCalle.style.display = "block"
+  } if (esq.value == "" || esq.value == null) {
+    esq.classList.add("error")
+    errorEsq.style.display = "block"
+  } if (puerta.value == "" || puerta.value == null) {
+    puerta.classList.add("error")
+    errorPuerta.style.display = "block"
+  } if (dpto.selectedIndex == null || dpto.selectedIndex == 0) {
+    dpto.classList.add("error")
+  } else {
+    $('#modal').modal('hide')
+    $('#metodo').modal('show')
+  }
+
+})
+opcion1 = document.getElementById("opcion1");
+opcion2 = document.getElementById("opcion2");
+opcion3 = document.getElementById("opcion3");
+//Evento que muestra el pago con tarjetas y oculta las otras opciones
+opcion1.addEventListener("click", () => {
+  document.getElementById("pagocard").style.display = "block"
+})
+//Evento que muestra el pago con transferencia y oculta las otras opciones
+opcion2.addEventListener("click", () => {
+  document.getElementById("transfer").style.display = "block"
+})
+//Evento que muestra el pago con paypal y oculta las otras opciones
+opcion3.addEventListener("click", () => {
+  document.getElementById("pay").style.display = "block"
+})
+
+//Eventos de botones de tarjetas de credito
+
+botonVisa = document.getElementById("radioVisa");
+botonMaster = document.getElementById("radioMaster");
+botonAmex = document.getElementById("radioAmex");
+botonDiners = document.getElementById("radioDiners");
+visa = document.getElementById("visa");
+master = document.getElementById("mastercard");
+amex = document.getElementById("amex");
+diners = document.getElementById("diners");
+
+botonVisa.addEventListener("click", () => {
+  document.getElementById("formularioTarjeta").style.display = "block";
+  visa.classList.add("checkSelect");
+  master.classList.remove("checkSelect");
+  amex.classList.remove("checkSelect");
+  diners.classList.remove("checkSelect");
+});
+botonMaster.addEventListener("click", () => {
+  document.getElementById("formularioTarjeta").style.display = "block";
+  master.classList.add("checkSelect");
+  amex.classList.remove("checkSelect");
+  diners.classList.remove("checkSelect");
+  visa.classList.remove("checkSelect");
+});
+botonAmex.addEventListener("click", () => {
+  document.getElementById("formularioTarjeta").style.display = "block";
+  amex.classList.add("checkSelect");
+  diners.classList.remove("checkSelect");
+  visa.classList.remove("checkSelect");
+  master.classList.remove("checkSelect");
+
+});
+botonDiners.addEventListener("click", () => {
+  document.getElementById("formularioTarjeta").style.display = "block";
+  diners.classList.add("checkSelect");
+  visa.classList.remove("checkSelect");
+  master.classList.remove("checkSelect");
+  amex.classList.remove("checkSelect");
+
+});
+
+
+
+//Evento botones formulario transferencia
+botonScotia = document.getElementById("scotia");
+botonRepublica = document.getElementById("republica");
+botonSantander = document.getElementById("santander");
+botonItau = document.getElementById("itau");
+pScotia = document.getElementById("pScotia")
+pRepublica = document.getElementById("pRepublica");
+pSantander = document.getElementById("pSantander");
+pItau = document.getElementById("pItau");
+// Validacion transferencia
+cuenta = document.getElementById("cuenta");
+destino = document.getElementById("destino");
+monto = document.getElementById("monto");
+pin = document.getElementById("pin");
+errorCuenta = document.getElementById("errorCuenta");
+errorDestino = document.getElementById("errorDestino");
+errorMonto = document.getElementById("errorMonto");
+errorpin = document.getElementById("errorPin");
+
+botonScotia.addEventListener("click", () => {
+  document.getElementById("formularioTransferencia").style.display = "block";
+  pScotia.classList.add("checkSelectBanco");
+  pRepublica.classList.remove("checkSelectBanco");
+  pSantander.classList.remove("checkSelectBanco");
+  pItau.classList.remove("checkSelectBanco");
+});
+pRepublica.addEventListener("click", () => {
+  document.getElementById("formularioTransferencia").style.display = "block";
+  pRepublica.classList.add("checkSelectBanco");
+  pItau.classList.remove("checkSelectBanco");
+  pSantander.classList.remove("checkSelectBanco");
+  pScotia.classList.remove("checkSelectBanco");
+});
+pSantander.addEventListener("click", () => {
+  document.getElementById("formularioTransferencia").style.display = "block";
+  pSantander.classList.add("checkSelectBanco");
+  pRepublica.classList.remove("checkSelectBanco");
+  pItau.classList.remove("checkSelectBanco");
+  pScotia.classList.remove("checkSelectBanco");
+});
+pItau.addEventListener("click", () => {
+  document.getElementById("formularioTransferencia").style.display = "block";
+  pItau.classList.add("checkSelectBanco");
+  pScotia.classList.remove("checkSelectBanco");
+  pSantander.classList.remove("checkSelectBanco");
+  pRepublica.classList.remove("checkSelectBanco");
+});
+fetch(mensajeExito)
+  .then(response => response.json())
+  .then(mensaje => {
+    mensajeCompra = document.getElementById("msjExito");
+    mensajeRes = mensaje.msg
+    mensajeCompra.innerHTML = `
+    <i class="far fa-thumbs-up"></i> ${mensajeRes}
+    
+    `
+  })
+  .catch(err => console.log(err));
+
+//Validacion formulario tarjeta
+let titular = document.getElementById("titular");
+let tarjeta = document.getElementById("numeroTarjeta");
+let cvv = document.getElementById("cvv");
+let año = document.getElementById("año");
+let mes = document.getElementById("mes");
+let errorTit = document.getElementById("errorTit");
+let errorNumero = document.getElementById("errorNumero");
+let errorCvv = document.getElementById("errorCvv");
+let errorMes = document.getElementById("errorMes");
+continuar = document.getElementById("continue");
+
+continuar.addEventListener("click", () => {
+  if (titular.value == "" || titular.value == null) {
+    titular.classList.add("error");
+    errorTit.style.display = "block";
+
+  } if (tarjeta.value == "" || tarjeta.value == null) {
+    tarjeta.classList.add("error")
+    errorNumero.style.display = "block"
+  } if (cvv.value == "" || cvv.value == null) {
+    cvv.classList.add("error")
+    errorCvv.style.display = "block"
+  } if (mes.selectedIndex == null || mes.selectedIndex == 0) {
+    mes.classList.add("error");
+  } if (año.selectedIndex == null || año.selectedIndex == 0) {
+    año.classList.add("error");
+  }
+  else {
+    $('#exito').modal('show');
+    $('#metodo').modal('hide');
+
+  }
+})
+
+
+
+continuar.addEventListener("click", () => {
+  if (destino.value == "" || destino.value == null) {
+    destino.classList.add("error");
+    errorDestino.style.display = "block";
+
+  } if (cuenta.value == "" || cuenta.value == null) {
+    cuenta.classList.add("error")
+    errorCuenta.style.display = "block"
+  } if (monto.value == "" || monto.value == null) {
+    monto.classList.add("error")
+    errorMonto.style.display = "block"
+  } if (pin.value == "" || pin.value == null) {
+    pin.classList.add("error")
+    errorPin.style.display = "block"
+  }
+  else {
+    $('#exito').modal('show');
+    $('#metodo').modal('hide');
+  }
+});

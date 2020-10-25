@@ -305,6 +305,9 @@ table,tr, th, td {
 #cont:hover{
     cursor: pointer;
 }
+#pagos:hover {
+    cursor: pointer;
+}
 
 #envio{
     text-align: center;
@@ -312,6 +315,7 @@ table,tr, th, td {
 
 #metodo {
     display: none;
+    overflow: scroll;
 }
 
 .envios {
@@ -322,12 +326,18 @@ table,tr, th, td {
     transition: all 0.5s ease-in-out 0s;
 }
 
+#check, #check1, #check2 {
+    display: none;
+    color: green;
+    font-size: 20px;
+}
+
 /* Estilos de la seccion pagos*/
 
 .card {
     font-size: 50px;
 }
-.card:hover{
+.cardOpt:hover{
     cursor: pointer;
     border: green 1px solid;
     transition: all 0.5s ease-in-out 0s;
@@ -353,14 +363,6 @@ table,tr, th, td {
 display: none;
 }
 
-#transfer {
-    display: none;
-}
-.transfer:hover{
-    cursor: pointer;
-    border: green 1px solid;
-}
-
 #pay {
     display: none;
 }
@@ -368,6 +370,17 @@ display: none;
     background-color: rgb(193, 212, 197);
     transition: all 0.5s ease-in-out 0s;
     color: rgb(44, 39, 39);
+}
+
+.checkSelectBanco {
+    border-radius: 5px;
+    background: -webkit-linear-gradient(left, rgb(109, 255, 165), rgb(29, 180, 97));
+    
+}
+.checkSelect {
+    border: 1.5px solid green;
+    border-radius: 5px;
+    
 }
 
 /* Validacion de formulario */
@@ -378,4 +391,83 @@ display: none;
 
 .activo:focus {
     border: green;
+}
+
+/* Estilos formulario tarjeta */
+
+.formCard {
+    font-size:  15px;
+}
+.formLabel {
+    font-size: 15px;
+}
+
+.formTarjeta {
+    padding-top: unset;
+}
+#formularioTarjeta, #formularioTransferencia {
+    display: none;
+}
+
+.spanPago {
+    font-size:  15px;
+}
+
+/* Estilos formulario transferencia */
+ .montoLabel {
+     margin-bottom: -15px;
+     margin-top: 12px;
+ }
+ .montoDiv {
+     display: flex;
+     margin-top: auto;
+ }
+
+ #monto {
+     width: 25% !important;
+ }
+
+ #tipo {
+     width: max-content;
+ }
+
+ #transfer {
+    display: none;
+}
+.transfer {
+    font-size: 15px;
+    margin-bottom: unset;
+}
+.transfer:hover{
+    cursor: pointer;
+    border: green 1px solid;
+}
+
+.pin {
+    background-color: rgb(199, 199, 199);
+    font-family: FontAwesome;
+    width: 50%;
+}
+
+.pinLock {
+    font-size: 20px;
+}
+
+.divPin {
+    display: flex;
+}
+
+.transLabel, .pinLabel {
+    padding-top: 5px;
+    margin-right: 15px;
+}
+
+#año, #mes {
+    margin-top: 16px;
+}
+
+#msjExito {
+    background-color: rgba(110, 240, 110, 0.582);
+    text-align: center;
+    font-size: 35px;
 }
