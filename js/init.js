@@ -51,4 +51,5 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
 
   document.getElementById("dropdownMenuButton").innerHTML = sessionStorage.getItem("isLogged");
+  
 });

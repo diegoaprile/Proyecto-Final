@@ -161,6 +161,10 @@ html {
   background-attachment: fixed;
 }
 
+
+.cardLink:link, .cardLink:visited, .cardLink:active {
+  text-decoration:none;
+} 
 /* Barra de navegacion*/
 
 #ctn-icon-search {

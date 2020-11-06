@@ -1,0 +1,41 @@
+.title {
+    text-align: center;
+}
+
+.profile {
+    
+    width: 50%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.picProfile {
+    width: 100px;
+    height: 100px;
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 10px;
+}
+
+#saveData {
+background-color: rgb(52, 206, 52);
+}
+
+#btnReset {
+  background-color: rgb(252, 67, 67);
+}
+#editData {
+  background-color: rgb(154, 235, 74);
+}
+
+#title, #title2 {
+ border-bottom: 1px black solid;
+}
+
+.backError {
+  background: -webkit-linear-gradient(left, rgb(233, 241, 236), rgb(241, 165, 165));
+}
+.backExit {
+  background: -webkit-linear-gradient(left, rgb(233, 241, 236), rgb(129, 248, 158));
+}

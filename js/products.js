@@ -32,20 +32,14 @@ function showCategoriesList(array) {
         let info = array[i];
 
         htmlContentToAppend += ` 
-            <div class="list-group-item list-group-item-action" >
-            <div class="row " id="` + info.name + `">
-                <div class="col-3">
-                    <img href="product-info.html" src="` + info.imgSrc + `" alt="` + info.description + `" class="img-thumbnail">
-                </div>
-                <div class="col">
-                    <div class="d-flex w-100 justify-content-between">
-                        <h4 class="mb-1">` + info.name + `</h4>
-                        <small class"text-muted">Costo: ` + info.currency + ` ` + info.cost + `<br/>Vendidos: ` + info.soldCount + ` </small>
-                    </div>
-                    <div id= "inform-products"> ` + info.description + `</div>
-                </div>
-            </div>
-        </div>
+        <div class="card" style="width: 18rem;">
+  <img src="` + info.imgSrc + `" class="card-img-top" alt="..." href="product-info.html">
+  <div class="card-body">
+  <h4 class="mb-1">` + info.name + `</h4>
+    <p class="card-text" id="inform-products" > ` + info.description + `</p>
+    <small class="card-text">Costo: ` + info.currency + ` $` + info.cost + `<br/>Vendidos: ` + info.soldCount + ` </small>
+  </div>
+</div>      
         `
     }
     document.getElementById("info-products").innerHTML = htmlContentToAppend;
@@ -98,31 +92,27 @@ function sortCategories(criteria, array) {
 
 }
 
-function showCategoriesListNoParam(){
+function showCategoriesListNoParam() {
     let htmlContentToAppend = "";
-    for(let i = 0; i < currentCategoriesArray.length; i++){
+    for (let i = 0; i < currentCategoriesArray.length; i++) {
         let info = currentCategoriesArray[i];
 
         if (((minCount == undefined) || (minCount != undefined && parseInt(info.productCount) >= minCount)) &&
-            ((maxCount == undefined) || (maxCount != undefined && parseInt(info.productCount) <= maxCount))){
+            ((maxCount == undefined) || (maxCount != undefined && parseInt(info.productCount) <= maxCount))) {
 
             htmlContentToAppend += `
-            <a href="product-info.html" class="list-group-item list-group-item-action">
-            <div class="list-group-item list-group-item-action" >
-            <div class="row " id="` + info.name + `">
-                <div class="col-3">
-                    <img src="` + info.imgSrc + `" alt="` + info.description + `" class="img-thumbnail">
-                </div>
-                <div class="col">
-                    <div class="d-flex w-100 justify-content-between">
-                        <h4 class="mb-1">` + info.name + `</h4>
-                        <small class"text-muted">Costo: ` + info.currency + ` ` + info.cost + `<br/>Vendidos: ` + info.soldCount + ` </small>
-                    </div>
-                    <div id= "inform-products"> ` + info.description + `</div>
-                </div>
+            <div class="col-md-4 mt-3 d-flex">
+            <a href="product-info.html" class="card mb-4 shadow-sm custom-card">
+                <img src="` + info.imgSrc + `" class="card-img-top" alt="` + info.description + `">
+                <div class="card-body">
+            <h4 class="mb-1">` + info.name + `</h4>
+            <p class="card-text" id= "inform-products">` + info.description + `</p>
+            <small class="card-text">Costo: ` + info.currency + ` $` + info.cost + `<br/>Vendidos: ` + info.soldCount + ` </small>
+    
+         </div>
+         </a>
             </div>
-        </div>
-        </a>
+
         `
         }
 
@@ -183,7 +173,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
 
 
 
-        if ((minCount != undefined) && (minCount != "") &&  (parseInt(minCount)) >= 0) {
+        if ((minCount != undefined) && (minCount != "") && (parseInt(minCount)) >= 0) {
             minCount = parseInt(minCount);
         }
         else {
@@ -202,12 +192,12 @@ document.addEventListener("DOMContentLoaded", function (e) {
         for (let i = 0; i < currentCategoriesArray.length; i++) {
             if (currentCategoriesArray[i].cost >= minCount && currentCategoriesArray[i].cost <= maxCount) {
                 priceFilteredProducts.push(currentCategoriesArray[i]);
-            } 
+            }
             // else if (minCount > maxCount || maxCount < minCount){
-                
+
             // }
 
-            
+
         }
 
         showCategoriesList(priceFilteredProducts);
